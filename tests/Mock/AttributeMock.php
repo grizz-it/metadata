@@ -29,4 +29,14 @@ class AttributeMock
         $this->attribute = $attribute;
         $this->value = $value;
     }
+
+    /**
+     * Convert value to string.
+     *
+     * @return string
+     */
+    public function __toString(): string
+    {
+        return $this->attribute . '.' . $this->value;
+    }
 }

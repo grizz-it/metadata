@@ -5,38 +5,38 @@
  * See LICENSE for license details.
  */
 
-namespace GrizzIt\Metadata\Tests\Component\Registry;
+namespace GrizzIt\Metadata\Tests\Registry;
 
 use PHPUnit\Framework\TestCase;
+use GrizzIt\Metadata\Registry\DecoratedRegistry;
 use GrizzIt\Metadata\Tests\Mock\AttributeMock;
 use GrizzIt\Metadata\Tests\Mock\AttributedClassMock;
-use GrizzIt\Metadata\Component\Registry\ClassRegistry;
 
 /**
- * @coversDefaultClass \GrizzIt\Metadata\Component\Registry\ClassRegistry
+ * @coversDefaultClass \GrizzIt\Metadata\Registry\DecoratedRegistry
  */
-class ClassRegistryTest extends TestCase
+class DecoratedRegistryTest extends TestCase
 {
     /**
      * @return void
      *
-     * @covers ::registerClass
-     * @covers ::getClasses
+     * @covers ::registerTarget
+     * @covers ::getTargets
      *
      * @runInSeparateProcess
      */
-    public function testComponent(): void
+    public function testRegistry(): void
     {
-        $this->assertEquals([], ClassRegistry::getClasses());
-        ClassRegistry::registerClass(AttributeMock::class);
-        ClassRegistry::registerClass(
+        $this->assertEquals([], DecoratedRegistry::getTargets());
+        DecoratedRegistry::registerTarget(AttributeMock::class);
+        DecoratedRegistry::registerTarget(
             AttributedClassMock::class,
             AttributeMock::class
         );
 
         $this->assertEquals(
             [AttributeMock::class, AttributedClassMock::class],
-            ClassRegistry::getClasses()
+            DecoratedRegistry::getTargets()
         );
     }
 }

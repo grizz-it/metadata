@@ -14,36 +14,35 @@ composer require grizz-it/metadata
 
 ## Usage
 
-Classes that use [attributes](https://www.php.net/manual/en/language.attributes.php)
-will need to be registered in the [ClassRegistry](src/Component/Registry/ClassRegistry.php)
-on the `registerClass` method. This can be done with an autoloading file in a
+Classes or functions that use [attributes](https://www.php.net/manual/en/language.attributes.php)
+will need to be registered in the [DecoratedRegistry](src/Registry/DecoratedRegistry.php)
+on the `registerTarget` method. This can be done with an autoloading file in a
 package with the following contents:
 ```php
 <?php
 
-use GrizzIt\Metadata\Component\Registry\ClassRegistry;
+use GrizzIt\Metadata\Registry\DecoratedRegistry;
 
-ClassRegistry::registerClass(MyAttributedClass::class);
+DecoratedRegistry::registerTarget(MyAttributedClass::class);
 ```
 
-This will include it in the list of registered classes.
+This will include it in the list of registered targets.
 When the compiler is asked to compile the attributes, it will be automatically
 picked up.
 
-To retrieve all classes and their attributes, the following snippet can be used:
+To retrieve all classes and functions and their attributes, the following snippet can be used:
 
 ```php
 <?php
 
-use GrizzIt\Metadata\Component\Compiler\AttributeCompiler;
+use GrizzIt\Metadata\Compiler\AttributeCompiler;
 
-$compiler = new AttributeCompiler();
-var_dump($compiler->compile());
+var_dump(AttributeCompiler::compile());
 
 ```
 
-This will create an instance of each attribute for each class in an associative
-array.
+This will create an instance of each attribute for each class and function in an
+associative array.
 
 ## Change log
 

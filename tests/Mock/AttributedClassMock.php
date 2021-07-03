@@ -9,17 +9,26 @@ namespace GrizzIt\Metadata\Tests\Mock;
 
 use GrizzIt\Metadata\Tests\Mock\AttributeMock;
 
-#[AttributeMock('foo', 'bar')]
+#[AttributeMock('class', 'foo')]
 class AttributedClassMock
 {
+    #[AttributeMock('property', 'bar')]
+    public string $foo = '';
+
+    #[AttributeMock('constant', 'baz')]
+    public const FOO_CONSTANT = 'foo';
+
     /**
      * Test method
      *
      * @return string
      */
-    #[AttributeMock('baz', 'qux')]
-    public function test(): string
-    {
-        return 'foo';
+    #[AttributeMock('method', 'qux')]
+    public function test(
+        #[AttributeMock('parameter', 'foo')] string $foo = 'foo'
+    ): string {
+        $this->foo = $foo;
+
+        return $foo;
     }
 }

@@ -30,7 +30,10 @@
     "autoload-dev": {
         "psr-4": {
             "GrizzIt\\Metadata\\Tests\\": "tests/"
-        }
+        },
+        "files": [
+            "tests/Mock/test.function.php"
+        ]
     },
     "archive": {
         "exclude": [

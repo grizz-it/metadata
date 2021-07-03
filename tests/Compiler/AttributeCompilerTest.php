@@ -5,34 +5,32 @@
  * See LICENSE for license details.
  */
 
-namespace GrizzIt\Metadata\Tests\Component\Compiler;
+namespace GrizzIt\Metadata\Tests\Compiler;
 
 use Attribute;
 use PHPUnit\Framework\TestCase;
 use GrizzIt\Metadata\Tests\Mock\AttributeMock;
 use GrizzIt\Metadata\Tests\Mock\AttributedClassMock;
-use GrizzIt\Metadata\Component\Registry\ClassRegistry;
-use GrizzIt\Metadata\Component\Compiler\AttributeCompiler;
+use GrizzIt\Metadata\Registry\DecoratedRegistry;
+use GrizzIt\Metadata\Compiler\AttributeCompiler;
 
 /**
- * @coversDefaultClass \GrizzIt\Metadata\Component\Compiler\AttributeCompiler
+ * @coversDefaultClass \GrizzIt\Metadata\Compiler\AttributeCompiler
  */
 class AttributeCompilerTest extends TestCase
 {
     /**
      * @return void
      *
-     * @covers ::__construct
      * @covers ::compile
      *
      * @runInSeparateProcess
      */
-    public function testComponent(): void
+    public function testCompiler(): void
     {
-        $subject = new AttributeCompiler();
-        ClassRegistry::registerClass(AttributeMock::class);
-        ClassRegistry::registerClass(AttributedClassMock::class);
-        $result = $subject->compile();
+        DecoratedRegistry::registerTarget(AttributeMock::class);
+        DecoratedRegistry::registerTarget(AttributedClassMock::class);
+        $result = AttributeCompiler::compile();
 
         $this->assertInstanceOf(
             Attribute::class,
