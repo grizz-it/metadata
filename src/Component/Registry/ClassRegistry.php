@@ -19,13 +19,16 @@ class ClassRegistry
     /**
      * Register a new class to the registry.
      *
-     * @param string $class
+     * @param string ...$class
      *
      * @return void
      */
-    public static function registerClass(string $class): void
+    public static function registerClass(string ...$class): void
     {
-        static::$classes[$class] = [];
+        static::$classes = array_merge(
+            static::$classes,
+            array_fill_keys($class, [])
+        );
     }
 
     /**

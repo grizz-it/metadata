@@ -22,13 +22,22 @@ class AttributeReader implements AttributeReaderInterface
     public function read(string $class): array
     {
         $attributes = [];
+        $methodAttributes = [];
         if (class_exists($class)) {
             $reflection = new ReflectionClass($class);
             foreach ($reflection->getAttributes() as $attribute) {
                 $attributes[] = $attribute->newInstance();
             }
+
+            foreach ($reflection->getMethods() as $method) {
+                foreach ($method->getAttributes() as $attribute) {
+                    $methodAttributes[
+                        $method->getName()
+                    ][] = $attribute->newInstance();
+                }
+            }
         }
 
-        return $attributes;
+        return ['class' => $attributes, 'methods' => $methodAttributes];
     }
 }

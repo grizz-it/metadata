@@ -29,8 +29,11 @@ class ClassRegistryTest extends TestCase
     {
         $this->assertEquals([], ClassRegistry::getClasses());
         ClassRegistry::registerClass(AttributeMock::class);
-        ClassRegistry::registerClass(AttributeMock::class);
-        ClassRegistry::registerClass(AttributedClassMock::class);
+        ClassRegistry::registerClass(
+            AttributedClassMock::class,
+            AttributeMock::class
+        );
+
         $this->assertEquals(
             [AttributeMock::class, AttributedClassMock::class],
             ClassRegistry::getClasses()

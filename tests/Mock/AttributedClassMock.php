@@ -12,4 +12,14 @@ use GrizzIt\Metadata\Tests\Mock\AttributeMock;
 #[AttributeMock('foo', 'bar')]
 class AttributedClassMock
 {
+    /**
+     * Test method
+     *
+     * @return string
+     */
+    #[AttributeMock('baz', 'qux')]
+    public function test(): string
+    {
+        return 'foo';
+    }
 }

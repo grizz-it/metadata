@@ -24,9 +24,15 @@ class AttributeReaderTest extends TestCase
     {
         $subject = new AttributeReader();
 
+        $result = $subject->read(AttributedClassMock::class);
         $this->assertInstanceOf(
             AttributeMock::class,
-            $subject->read(AttributedClassMock::class)[0]
+            $result['class'][0]
+        );
+
+        $this->assertInstanceOf(
+            AttributeMock::class,
+            $result['methods']['test'][0]
         );
     }
 }

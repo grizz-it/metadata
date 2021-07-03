@@ -36,12 +36,12 @@ class AttributeCompilerTest extends TestCase
 
         $this->assertInstanceOf(
             Attribute::class,
-            $result[AttributeMock::class][0]
+            $result[AttributeMock::class]['class'][0]
         );
 
         $this->assertInstanceOf(
             AttributeMock::class,
-            $result[AttributedClassMock::class][0]
+            $result[AttributedClassMock::class]['class'][0]
         );
     }
 }
